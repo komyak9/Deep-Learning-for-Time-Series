@@ -1,0 +1,9 @@
+pandas==2.3.0
+et-xmlfile==2.0.0
+openpyxl==3.1.5
+openmeteo-requests==1.5.0
+requests-cache==1.2.1
+retry-requests==2.0.0
+matplotlib==3.10.3
+seaborn==0.13.2
+
