@@ -40,6 +40,7 @@ def load_raw_data_from_dir() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     prod_df = load_raw_production(raw_data_dir)
     merged_data = pd.merge(prices_df, cons_df, on=["start_ts_utc", "end_ts_utc"], how="left")
     merged_data = pd.merge(merged_data, prod_df, on=["start_ts_utc", "end_ts_utc"], how="left")
+    merged_data.replace(["n/e", "-"], np.nan, inplace=True)
     return merged_data
 
 
@@ -116,7 +117,6 @@ def load_raw_production(raw_data_dir: str) -> pd.DataFrame:
 
     prod_df = prod_df.pivot(index=["start_ts_utc", "end_ts_utc"], columns="production_type", values="actual_generation_mw").reset_index()
     prod_df.columns = list(prod_df.columns[:2])+["actual_generation_mw_"+col.lower().replace(" ", "_") for col in prod_df.columns[2:]]
-    prod_df.replace(["n/e", "-"], np.nan, inplace=True)
     return prod_df
 
 
