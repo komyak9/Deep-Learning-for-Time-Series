@@ -137,7 +137,6 @@ def load_and_save_raw_weather_forecast():
 
     fcst_dfs = []
     for coord_pair, city_name in zip(coordinate_to_city.keys(), coordinate_to_city.values()):
-        print(f"Coordinates: {tuple(coord_pair), city_name}")
         extr_forecast = load_raw_weather_forecast_from_om(coordinates=tuple(coord_pair))
         extr_forecast['city'] = city_name
         fcst_dfs.append(extr_forecast)
@@ -160,7 +159,7 @@ def load_raw_weather_forecast_from_om(
     latitudes, longitudes = zip(coordinates)
     weather_params = [
         "temperature_2m", "dew_point_2m", "relative_humidity_2m", "rain", "showers", "snowfall", "snow_depth",
-        "cloud_cover", "cloud_cover_low", "cloud_cover_mid", "cloud_cover_high", "evapotranspiration",
+        "cloud_cover", "cloud_cover_low", "cloud_cover_mid", "cloud_cover_high",
         "wind_speed_10m", "wind_speed_120m", "wind_speed_80m", "wind_speed_180m",
         "wind_direction_10m", "wind_direction_80m", "wind_direction_180m", "wind_direction_120m",
         "wind_gusts_10m", "direct_radiation", "diffuse_radiation", "shortwave_radiation"
