@@ -45,6 +45,32 @@ def load_raw_data_from_dir() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 
 
 
+def load_installed_capacities(raw_data_dir: str) -> pd.DataFrame:
+    """
+    Load installed capacities data from the data/raw/capacities directory.
+    Return as a pandas DataFrame.
+    """
+    capacities_df = read_from_dir_as_df(dir_path=os.path.join(raw_data_dir, "capacities"))
+    capacities_df.rename(
+        columns={
+            "Installed Capacity (MW)": "installed_capacity_mw",
+            "Production Type": "production_type",
+            "Year": "year"
+        },
+        inplace=True
+    )
+    renewable_types = ['Solar', 'Wind Offshore', 'Wind Onshore']
+    capacities_df = capacities_df[capacities_df["production_type"].isin(renewable_types)]
+
+    columns_to_select = ["year", "production_type", "installed_capacity_mw"]
+    capacities_df = capacities_df[columns_to_select].sort_values(by=["year", "production_type"]).reset_index(drop=True)
+
+    capacities_df = capacities_df.pivot(index=["year"], columns="production_type", values="installed_capacity_mw").reset_index()
+    capacities_df.columns = list(capacities_df.columns[:1])+["installed_capacity_mw_"+col.lower().replace(" ", "_") for col in capacities_df.columns[1:]]
+    return capacities_df
+
+
+
 def load_raw_prices(raw_data_dir: str) -> pd.DataFrame:
     """
     Load electricity price data from the 'data/raw/prices' directory.
