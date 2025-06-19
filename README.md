@@ -1,7 +1,6 @@
 ## Overview
-This pet-project aims to compare a classical Machine Learning model, LightGBM, with Neural Networks for the time-series forecasting task in terms of dev time complexity. </br>
-The task is to create several models for the day-ahead energy price forecasting using open source data for Germany, while tracking the time spent on each model with Clockify. </br>
-The project is designed to ensure all experiments are reproducible.
+<p align="full-width">This pet-project aims to compare a classical Machine Learning model, LightGBM, with Neural Networks for the time-series forecasting task in terms of dev time complexity. The task is to create several models for the day-ahead energy price forecasting using open source data for Germany, while tracking the time spent on each model with Clockify.</p>
+<p align="full-width">The project is designed to ensure all experiments are reproducible.</p>
 
 
 ## Structure
